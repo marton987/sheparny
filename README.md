@@ -9,16 +9,16 @@ events and sign up for an event and withdraw from an event.
 
 Any user can list events:
 
-- Sorted so that upcoming events are first
-- List view shows title, date and amount of participants
-- List view shows the owner of the event (as the part of the email 
+- [ ] Sorted so that upcoming events are first
+- [ ] List view shows title, date and amount of participants
+- [ ] List view shows the owner of the event (as the part of the email 
 before the "@")
-- Assume there will be many thousands of events, users and participants 
+- [ ] Assume there will be many thousands of events, users and participants 
 per event
-- Any logged in user can create events
-- Logged in user can edit own events
-- Login with email and password
-- Registration with email and password
+- [ ] Any logged in user can create events
+- [ ] Logged in user can edit own events
+- [x] Login with email and password
+- [x] Registration with email and password
 
 ### Out of scope
 
@@ -53,4 +53,17 @@ authentication:
 
         (venv) django$ python manage.py runserver
 
-You can be authenticated under [http://localhost:8000/api/login](http://localhost:8000/api/login)
+And check project documentation [here](http://localhost:8000/api/docs)
+
+You can be authenticated under [http://localhost:8000/api/v1/auth/login](http://localhost:8000/api/v1/auth/login)
+
+## Run tests
+
+Running tests
+
+        (venv) django$ python manage.py test
+
+Get coverage details
+
+        (venv) $ coverage run manage.py test
+        (venv) $ coverage report
