@@ -9,14 +9,14 @@ events and sign up for an event and withdraw from an event.
 
 Any user can list events:
 
-- [ ] Sorted so that upcoming events are first
-- [ ] List view shows title, date and amount of participants
-- [ ] List view shows the owner of the event (as the part of the email 
+- [x] Sorted so that upcoming events are first
+- [x] List view shows title, date and amount of participants
+- [x] List view shows the owner of the event (as the part of the email 
 before the "@")
-- [ ] Assume there will be many thousands of events, users and participants 
+- [x] Assume there will be many thousands of events, users and participants 
 per event
-- [ ] Any logged in user can create events
-- [ ] Logged in user can edit own events
+- [x] Any logged in user can create events
+- [x] Logged in user can edit own events
 - [x] Login with email and password
 - [x] Registration with email and password
 

@@ -20,4 +20,5 @@ from rest_framework.documentation import include_docs_urls
 urlpatterns = [
     path('api/docs/', include_docs_urls(title='Sheparny API docs')),
     path('api/v1/', include('accounts.urls')),
+    path('api/v1/', include('events.urls')),
 ]
