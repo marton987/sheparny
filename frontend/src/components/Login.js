@@ -4,8 +4,9 @@ import { useHistory } from 'react-router-dom';
 
 import { ServerClient } from '../services/server-client';
 
+const serverClient = new ServerClient();
+
 const Login = () => {
-  const serverClient = new ServerClient();
   const { register, handleSubmit, errors, setError } = useForm();
   const history = useHistory();
   const onSubmit = (data) => {

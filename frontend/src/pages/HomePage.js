@@ -8,30 +8,50 @@ const serverClient = new ServerClient();
 
 const HomePage = () => {
   const [events, setEvents] = useState([]);
-  const [currentEvent] = useState({});
-  // const [currentEvent, setCurrentEvent] = useState({});
-  // const [page, setPage] = useState(0);
-  // const [offset, setOffset] = useState(0);
-  const [page] = useState(0);
-  const [offset] = useState(0);
+  const [currentEvent, setCurrentEvent] = useState({});
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
-    serverClient.listEvents(page, offset).then((res) => {
+    serverClient.listEvents(page, page * 10, 10).then((res) => {
       setEvents(res);
     });
-  }, [page, offset]);
+  }, [page, currentEvent]);
+
+  const logout = () => {
+    serverClient.logout();
+    setCurrentEvent({});
+  };
 
   const handleWithdraw = (event) => {
-    console.log(event);
+    serverClient.attendEvent(event.id, false).then(() => {
+      setCurrentEvent({});
+    });
   };
 
   const handleAttend = (event) => {
-    console.log(event);
+    serverClient.attendEvent(event.id, true).then(() => {
+      setCurrentEvent({});
+    });
+  };
+
+  const addPage = (number) => {
+    setPage(Math.max(0, page + number));
   };
 
   const EventRow = (event) => {
     return (
       <tr key={event.id}>
+        <td>
+          {serverClient.isAuthenticated() &&
+            serverClient.getUser().username === event.created_by && (
+              <button
+                className="button is-small"
+                onClick={() => setCurrentEvent(event)}
+              >
+                Edit
+              </button>
+            )}
+        </td>
         <td>{event.id}</td>
         <td>{event.title}</td>
         <td>@{event.created_by}</td>
@@ -74,11 +94,7 @@ const HomePage = () => {
                   Login
                 </Link>
               ) : (
-                <Link
-                  className="navbar-item"
-                  onClick={() => serverClient.logout()}
-                  to="#"
-                >
+                <Link className="navbar-item" onClick={logout} to="#">
                   Logout
                 </Link>
               )}
@@ -96,6 +112,7 @@ const HomePage = () => {
                   <table className="table">
                     <thead>
                       <tr>
+                        <th></th>
                         <th>ID</th>
                         <th>Title</th>
                         <th>Owner</th>
@@ -106,10 +123,24 @@ const HomePage = () => {
                     </thead>
                     <tbody>{events.map(EventRow)}</tbody>
                   </table>
+                  <nav className="pagination" role="navigation">
+                    <button
+                      className="pagination-previous"
+                      onClick={() => addPage(-1)}
+                    >
+                      Previous
+                    </button>
+                    <button
+                      className="pagination-next"
+                      onClick={() => addPage(1)}
+                    >
+                      Next page
+                    </button>
+                  </nav>
                 </div>
               </div>
               {serverClient.isAuthenticated() && (
-                <EventForm event={currentEvent} />
+                <EventForm event={currentEvent} setEvent={setCurrentEvent} />
               )}
             </div>
           </div>
