@@ -2,6 +2,8 @@
 
 Home task project to build an "events" web application.
 
+*Author: [@marton987](https://github.com/marton987)*
+
 ## Task description
 
 Build an "events" web application where users can log in, create 
@@ -28,54 +30,28 @@ per event
 - profile editing
 - change email
 
-## Set environment
-
-Under the project folder install the dependencies:
-
-        $ cd backend/
-        $ source venv/bin/activate
-        (venv)$ pip install -r requirements.txt
-
-Requirements:
-    
-- Python3
-- [venv](https://docs.python.org/3/library/venv.html)
-- [pip](https://pypi.org/project/pip/)
-
-## Create testing user
-
-Running the next command, a form will be prompt to set user credentials for basic
-authentication: 
-
-        (venv) django$ python createsuperuser
-
 ## Run project
 
-        (venv) django$ python manage.py runserver
+Run the next commands to run docker and start the project:
 
-And check project documentation [here](http://localhost:8000/api/docs)
+        docker-compose build
+        docker-compose up
+        
+Then you can visit [http://localhost:3000](http://localhost:3000) to look over the events page
+where you can authenticate and create new events.
 
-You can be authenticated under [http://localhost:8000/api/v1/auth/login](http://localhost:8000/api/v1/auth/login)
+Api documentation is under [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
 
-## Run tests
+* You can follow each README.md under [frontend/](./frontend/README.md) and [backend/](./backend/README.md) 
+to start the project without Docker.
+
+### Run project tests
 
 Running tests
 
-        (venv) django$ python manage.py test
+        $ docker-compose exec backend python manage.py test
 
 Get coverage details
 
-        (venv) $ coverage run manage.py test
-        (venv) $ coverage report
-
-
-## Run frontend application
-
-Under the frontend directory, install the dependencies and run the project.
-
-
-        $ cd frontend/
-        $ yarn install
-        $ yarn start
-        
-Then you can visit [http://localhost:3000](http://localhost:3000)
+        $ docker-compose exec backend coverage run manage.py test
+        $ docker-compose exec backend coverage report

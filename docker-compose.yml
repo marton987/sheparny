@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./frontend.dockerfile
+    container_name: frontend-sheparny
+    ports:
+      - "3000:3000"
+    networks:
+        - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./backend.dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    container_name: backend-sheparny
+    ports:
+      - "8000:8000"
+    working_dir: /app
+
+networks:
+  app-network:
+    driver: bridge
