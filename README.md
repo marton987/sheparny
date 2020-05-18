@@ -67,3 +67,15 @@ Get coverage details
 
         (venv) $ coverage run manage.py test
         (venv) $ coverage report
+
+
+## Run frontend application
+
+Under the frontend directory, install the dependencies and run the project.
+
+
+        $ cd frontend/
+        $ yarn install
+        $ yarn start
+        
+Then you can visit [http://localhost:3000](http://localhost:3000)
